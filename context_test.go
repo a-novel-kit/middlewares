@@ -1,22 +1,30 @@
 package middlewares_test
 
 import (
-	"github.com/a-novel-kit/context"
-	"github.com/a-novel-kit/middlewares"
-	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/require"
+
+	"github.com/a-novel-kit/context"
+
+	"github.com/a-novel-kit/middlewares"
 )
 
 func TestUseContext(t *testing.T) {
+	t.Parallel()
+
 	t.Run("OK", func(t *testing.T) {
-		ctx := context.WithValue(context.Background(), "foo", "bar")
+		t.Parallel()
+
+		ctx := context.WithValue(context.Background(), context.CtxKey("foo"), "bar")
 
 		handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if r.Context().Value("foo") != "bar" {
+			if r.Context().Value(context.CtxKey("foo")) != "bar" {
 				w.WriteHeader(http.StatusInternalServerError)
+
 				return
 			}
 
@@ -31,7 +39,9 @@ func TestUseContext(t *testing.T) {
 	})
 
 	t.Run("Timeout", func(t *testing.T) {
-		handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		t.Parallel()
+
+		handler := http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			time.Sleep(10 * time.Millisecond)
 			w.WriteHeader(http.StatusOK)
 		})
