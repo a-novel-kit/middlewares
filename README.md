@@ -1,0 +1,17 @@
+# Middlewares
+
+HTTP Middlewares for A-Novel apps.
+
+[Documentation](https://a-novel-kit.github.io/middlewares/).
+
+```bash
+go get github.com/a-novel-kit/middlewares
+```
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/a-novel-kit/middlewares/main.yaml)
+[![codecov](https://codecov.io/gh/a-novel-kit/middlewares/graph/badge.svg?token=rquMgl7MDS)](https://codecov.io/gh/a-novel-kit/middlewares)
+
+![GitHub repo file or directory count](https://img.shields.io/github/directory-file-count/a-novel-kit/middlewares)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/a-novel-kit/middlewares)
+
+![Coverage graph](https://codecov.io/gh/a-novel-kit/middlewares/graphs/sunburst.svg?token=rquMgl7MDS)
