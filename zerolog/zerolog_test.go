@@ -2,16 +2,20 @@ package zeromiddleware_test
 
 import (
 	"bytes"
-	zeromiddleware "github.com/a-novel-kit/middlewares/zerolog"
-	"github.com/go-chi/chi/v5/middleware"
-	"github.com/rs/zerolog"
-	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/go-chi/chi/v5/middleware"
+	"github.com/rs/zerolog"
+	"github.com/stretchr/testify/require"
+
+	zeromiddleware "github.com/a-novel-kit/middlewares/zerolog"
 )
 
 func TestZeroLogger(t *testing.T) {
+	t.Parallel()
+
 	testCases := []struct {
 		name string
 
@@ -41,10 +45,12 @@ func TestZeroLogger(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
+			t.Parallel()
+
 			var buff bytes.Buffer
 			logger := zerolog.New(&buff)
 
-			baseHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			baseHandler := http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 				w.WriteHeader(testCase.status)
 			})
 
