@@ -16,13 +16,15 @@ import (
 func TestUseContext(t *testing.T) {
 	t.Parallel()
 
+	type foo struct{}
+
 	t.Run("OK", func(t *testing.T) {
 		t.Parallel()
 
-		ctx := context.WithValue(context.Background(), context.CtxKey("foo"), "bar")
+		ctx := context.WithValue(context.Background(), foo{}, "bar")
 
 		handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if r.Context().Value(context.CtxKey("foo")) != "bar" {
+			if r.Context().Value(foo{}) != "bar" {
 				w.WriteHeader(http.StatusInternalServerError)
 
 				return
