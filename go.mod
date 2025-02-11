@@ -3,7 +3,7 @@ module github.com/a-novel-kit/middlewares
 go 1.23.6
 
 require (
-	github.com/a-novel-kit/context v1.0.2
+	github.com/a-novel-kit/context v1.1.0
 	github.com/stretchr/testify v1.10.0
 )
 
