@@ -1,5 +1,5 @@
-github.com/a-novel-kit/context v1.1.0 h1:K7upnkIyf+ad/P0Wnkbq+ACa3mdHylhE+NT/5qHQ9SY=
-github.com/a-novel-kit/context v1.1.0/go.mod h1:91n6aYr2hdnB98R7RD3WbXJZ5uwLbcTtayIbHjQ3Y0I=
+github.com/a-novel-kit/context v1.1.1 h1:APXRdlC3F3AUIkDxlL4dXTev0vA1OotD4ZMSFkLA9bU=
+github.com/a-novel-kit/context v1.1.1/go.mod h1:1/WXBbNfVwJr1cN4EyivuUUjQDfArgcaOmFculbJuto=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

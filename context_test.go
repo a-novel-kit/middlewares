@@ -21,7 +21,7 @@ func TestUseContext(t *testing.T) {
 	t.Run("OK", func(t *testing.T) {
 		t.Parallel()
 
-		ctx := context.WithValue(context.Background(), foo{}, "bar")
+		ctx := context.WithValue(t.Context(), foo{}, "bar")
 
 		handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			if r.Context().Value(foo{}) != "bar" {
@@ -51,7 +51,7 @@ func TestUseContext(t *testing.T) {
 		req := httptest.NewRequest(http.MethodGet, "/something", nil)
 		w := httptest.NewRecorder()
 
-		middlewares.UseContext(context.Background(), time.Millisecond)(handler).ServeHTTP(w, req)
+		middlewares.UseContext(t.Context(), time.Millisecond)(handler).ServeHTTP(w, req)
 		require.Equal(t, http.StatusGatewayTimeout, w.Code)
 	})
 }

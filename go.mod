@@ -1,9 +1,9 @@
 module github.com/a-novel-kit/middlewares
 
-go 1.23.6
+go 1.24
 
 require (
-	github.com/a-novel-kit/context v1.1.0
+	github.com/a-novel-kit/context v1.1.1
 	github.com/stretchr/testify v1.10.0
 )
 
