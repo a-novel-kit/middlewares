@@ -3,7 +3,7 @@
 HTTP Middlewares for A-Novel apps.
 
 ```bash
-go get github.com/a-novel-kit/middlewares/zerolog
+go get github.com/a-novel-kit/middlewares
 ```
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/a-novel-kit/middlewares/main.yaml)
@@ -15,6 +15,10 @@ go get github.com/a-novel-kit/middlewares/zerolog
 
 ![Coverage graph](https://codecov.io/gh/a-novel-kit/middlewares/graphs/sunburst.svg?token=rquMgl7MDS)
 
-Zerolog
+## Zerolog
+
+```bash
+go get github.com/a-novel-kit/middlewares/zerolog
+```
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/a-novel-kit/middlewares)](https://goreportcard.com/report/github.com/a-novel-kit/middlewares)
