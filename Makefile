@@ -7,8 +7,7 @@ lint:
 	go run github.com/golangci/golangci-lint/cmd/golangci-lint@latest run
 
 format-main:
-	go mod tidy
-	go run github.com/golangci/golangci-lint/cmd/golangci-lint@latest run --fix
+
 
 format-zerolog:
 	cd "$(CURDIR)/zerolog" && go mod tidy
