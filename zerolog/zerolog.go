@@ -2,10 +2,16 @@ package zeromiddleware
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/rs/zerolog"
 	"github.com/samber/lo"
+)
+
+var (
+	Now   = time.Now
+	Since = time.Since
 )
 
 // ZeroLog sets a zerolog logger to the request context and logs the request when it's done.
@@ -14,6 +20,8 @@ import (
 func ZeroLog(parentLogger *zerolog.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			startAt := Now()
+
 			// Capture the response writer to get the status code.
 			ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
 			ctx := r.Context()
@@ -41,6 +49,8 @@ func ZeroLog(parentLogger *zerolog.Logger) func(http.Handler) http.Handler {
 				Str("user_agent", r.UserAgent()).
 				Str("remote", r.RemoteAddr).
 				Str("path", r.URL.Path).
+				Time("start_at", startAt).
+				Dur("duration", Since(startAt)).
 				Msg("request completed")
 		})
 	}

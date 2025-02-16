@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/rs/zerolog"
@@ -27,25 +28,36 @@ func TestZeroLogger(t *testing.T) {
 			name:   "OK",
 			status: http.StatusOK,
 			expect: `{"level":"info","message":"request completed","method":"GET","path":"/something",
-"remote":"127.0.0.1:1234","request_id":"","status":200,"url":"/something","user_agent":"test-ua"}`,
+"remote":"127.0.0.1:1234","request_id":"","status":200,"url":"/something","user_agent":"test-ua","duration":1000,
+"start_at":"1970-01-01T00:00:00Z"}`,
 		},
 		{
 			name:   "NotFound",
 			status: http.StatusNotFound,
 			expect: `{"level":"warn","message":"request completed","method":"GET","path":"/something",
-"remote":"127.0.0.1:1234","request_id":"","status":404,"url":"/something","user_agent":"test-ua"}`,
+"remote":"127.0.0.1:1234","request_id":"","status":404,"url":"/something","user_agent":"test-ua","duration":1000,
+"start_at":"1970-01-01T00:00:00Z"}`,
 		},
 		{
 			name:   "InternalServerError",
 			status: http.StatusInternalServerError,
 			expect: `{"level":"error","message":"request completed","method":"GET","path":"/something",
-"remote":"127.0.0.1:1234","request_id":"","status":500,"url":"/something","user_agent":"test-ua"}`,
+"remote":"127.0.0.1:1234","request_id":"","status":500,"url":"/something","user_agent":"test-ua","duration":1000,
+"start_at":"1970-01-01T00:00:00Z"}`,
 		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			t.Parallel()
+
+			zeromiddleware.Now = func() time.Time {
+				return time.Unix(0, 0).UTC()
+			}
+
+			zeromiddleware.Since = func(time.Time) time.Duration {
+				return time.Second
+			}
 
 			var buff bytes.Buffer
 			logger := zerolog.New(&buff)
