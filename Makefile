@@ -5,9 +5,10 @@ test:
 # Check code quality.
 lint:
 	go run github.com/golangci/golangci-lint/cmd/golangci-lint@latest run
+	npx prettier . --check
 
 format-main:
-
+	npx prettier . --write
 
 format-zerolog:
 	cd "$(CURDIR)/zerolog" && go mod tidy
