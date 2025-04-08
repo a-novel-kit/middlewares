@@ -11,6 +11,15 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: true
+      - name: create sub modules tags
+        run: |
+          git tag golm/${{ github.ref_name }}
+          git push origin golm/${{ github.ref_name }}
+          git tag zerolog/${{ github.ref_name }}
+          git push origin zerolog/${{ github.ref_name }}
       - uses: a-novel-kit/workflows/publish-actions/auto-release@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
