@@ -15,6 +15,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: create sub modules tags
+        shell: bash
         run: |
           git tag golm/${{ github.ref_name }}
           git push origin golm/${{ github.ref_name }}
