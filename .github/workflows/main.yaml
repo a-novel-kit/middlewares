@@ -10,12 +10,32 @@ jobs:
     steps:
       - uses: a-novel-kit/workflows/go-actions/test-go@master
 
-  lint-go:
+  detect-modules:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      modules: ${{ steps.set-modules.outputs.modules }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - id: set-modules
+        run: echo "modules=$(go list -m -json | jq -s '.' | jq -c '[.[].Dir]')" >> $GITHUB_OUTPUT
+
+  lint-go:
+    needs: [detect-modules]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        modules: ${{ fromJSON(needs.detect-modules.outputs.modules) }}
     permissions:
       contents: read
     steps:
       - uses: a-novel-kit/workflows/go-actions/lint-go@master
+        with:
+          working-directory: ${{ matrix.modules }}
 
   lint-prettier:
     runs-on: ubuntu-latest
