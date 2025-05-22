@@ -21,6 +21,8 @@ jobs:
           git push origin golm/${{ github.ref_name }}
           git tag zerolog/${{ github.ref_name }}
           git push origin zerolog/${{ github.ref_name }}
+          git tag sentry/${{ github.ref_name }}
+          git push origin sentry/${{ github.ref_name }}
       - uses: a-novel-kit/workflows/publish-actions/auto-release@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
