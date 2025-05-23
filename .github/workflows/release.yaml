@@ -17,8 +17,6 @@ jobs:
       - name: create sub modules tags
         shell: bash
         run: |
-          git tag golm/${{ github.ref_name }}
-          git push origin golm/${{ github.ref_name }}
           git tag zerolog/${{ github.ref_name }}
           git push origin zerolog/${{ github.ref_name }}
           git tag sentry/${{ github.ref_name }}
