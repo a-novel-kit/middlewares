@@ -15,7 +15,7 @@ updates:
   - package-ecosystem: gomod
     rebase-strategy: auto
     open-pull-requests-limit: 25
-    directory: /golm
+    directory: /sentry
     schedule:
       interval: daily
   - package-ecosystem: "github-actions"
