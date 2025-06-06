@@ -1,6 +1,6 @@
 module github.com/a-novel-kit/middlewares/sentry
 
-go 1.24.3
+go 1.24.4
 
 require (
 	github.com/getsentry/sentry-go v0.33.0
